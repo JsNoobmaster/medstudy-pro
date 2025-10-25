@@ -1,0 +1,490 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: clamp(2em, 6vw, 2.5em);
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-button:hover {
+            background: white;
+            color: #fa709a;
+        }
+
+        /* Deck Selection Screen */
+        .deck-selection-screen {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .deck-selection-screen h2 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: clamp(1.3em, 4vw, 1.8em);
+        }
+
+        .instruction-text {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .deck-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        .deck-checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .deck-checkbox-item:hover {
+            background: #e9ecef;
+        }
+
+        .deck-checkbox-item.selected {
+            background: #fff3e0;
+            border-color: #fa709a;
+        }
+
+        .deck-checkbox {
+            width: 22px;
+            height: 22px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #fa709a;
+        }
+
+        .deck-info-select {
+            flex: 1;
+        }
+
+        .deck-name-select {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: clamp(1em, 3.5vw, 1.1em);
+        }
+
+        .deck-count {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .selection-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .select-all-btn {
+            background: #339af0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .selection-summary {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .summary-text {
+            font-weight: bold;
+            color: #333;
+            font-size: clamp(1em, 3.5vw, 1.1em);
+        }
+
+        .total-questions {
+            color: #fa709a;
+            font-size: clamp(1.5em, 5vw, 2em);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Difficulty Selection */
+        .difficulty-selection {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .difficulty-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .difficulty-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .difficulty-card {
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .difficulty-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+        }
+
+        .difficulty-card.easy { background: linear-gradient(135deg, #d3f9d8, #b2f2bb); }
+        .difficulty-card.medium { background: linear-gradient(135deg, #fff3bf, #ffe066); }
+        .difficulty-card.hard { background: linear-gradient(135deg, #ffe3e3, #ffc9c9); }
+        .difficulty-card.beast { background: linear-gradient(135deg, #e7f5ff, #d0ebff); }
+
+        .difficulty-icon {
+            font-size: clamp(2.2em, 8vw, 2.8em);
+            margin-bottom: 10px;
+        }
+
+        .difficulty-title {
+            font-size: clamp(1.2em, 4vw, 1.4em);
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .difficulty-desc {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .difficulty-time {
+            color: #333;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        /* Game Section */
+        .game-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .score-display {
+            font-size: clamp(1.3em, 5vw, 1.8em);
+            font-weight: bold;
+            color: #fa709a;
+        }
+
+        .combo-display {
+            font-size: clamp(1.1em, 4vw, 1.4em);
+            font-weight: bold;
+            color: #51cf66;
+        }
+
+        .timer-display {
+            font-size: clamp(1.3em, 5vw, 1.8em);
+            font-weight: bold;
+            color: #333;
+        }
+
+        .timer-display.warning {
+            color: #ff6b6b;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .question-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            min-height: 120px;
+        }
+
+        .question-type {
+            display: inline-block;
+            background: #fa709a;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: clamp(1.1em, 4vw, 1.3em);
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mcq-option {
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mcq-option:hover {
+            border-color: #fa709a;
+            background: #fff5f7;
+        }
+
+        .mcq-option.selected {
+            border-color: #fa709a;
+            background: #ffe3e9;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #fa709a, #fee140);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: clamp(1em, 4vw, 1.2em);
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feedback-bar {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .feedback-bar.correct {
+            background: #d3f9d8;
+            color: #2b8a3e;
+        }
+
+        .feedback-bar.wrong {
+            background: #ffe3e3;
+            color: #c92a2a;
+        }
+
+        /* Results Section */
+        .results-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .results-section h2 {
+            font-size: clamp(1.8em, 6vw, 2.5em);
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .final-score {
+            font-size: clamp(2.5em, 10vw, 4em);
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #fa709a, #fee140);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-box {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: clamp(1.8em, 6vw, 2.5em);
+            font-weight: bold;
+            color: #fa709a;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .performance-message {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .action-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .retry-btn {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+            color: white;
+        }
+
+        .home-btn {
+            background: #868e96;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .continue-btn {
+            background: #51cf66;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .continue-btn:disabled {
+            background: #adb5bd;
+            cursor: not-allowed;
+        }
