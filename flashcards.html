@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Flashcards</title>
+<link rel="stylesheet" href="styles/flashcards.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Interactive Flashcards</h1>
+        </div>
+
+        <div class="upload-section" id="uploadSection">
+            <h2>📚 Flashcard Library</h2>
+            <p>Upload a new JSON file or select from your saved decks below</p>
+            
+            <div class="file-input-wrapper">
+                <label class="file-input-label">
+                    📁 Upload New Deck
+                    <input type="file" id="fileInput" accept=".json">
+                    
+                </label>
+                <button class="btn-mode" onclick="window.location.href='combine-decks.html'" style="background: #f5576c;">📝COMBINE DECK</button>
+            </div>
+
+            <div class="saved-decks">
+                <h3>💾 Saved Decks</h3>
+                <div class="deck-list" id="deckList">
+                    <div class="empty-state">No saved decks yet. Upload a deck to get started!</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="flashcardSection" class="hidden">
+            <div class="mode-indicator">
+                <span>
+                    <span id="modeText">📚 Study Mode: Normal</span>
+                    <span class="deck-title" id="currentDeckName"></span>
+                </span>
+                <span class="save-indicator" id="saveIndicator">✓ Auto-saved</span>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value" id="masteredCount">0</span>
+                    <span class="stat-label">Mastered</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="reviewCount">0</span>
+                    <span class="stat-label">Need Review</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="seenCount">0</span>
+                    <span class="stat-label">Cards Seen</span>
+                </div>
+            </div>
+
+            <div class="header">
+                <div class="progress">
+                    <span id="current">1</span> / <span id="total">0</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <div class="flashcard-wrapper">
+                <div class="flashcard" id="flashcard">
+                    <div class="card-face card-front">
+                        <div class="card-label">QUESTION</div>
+                        <div class="repeat-badge hidden" id="repeatBadge">🔄 Review</div>
+                        <div class="card-content" id="question"></div>
+                        <img class="card-image hidden" id="questionImage" alt="Question image">
+                        <div class="tap-hint">Click to reveal answer</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="card-label">ANSWER</div>
+                        <div class="repeat-badge hidden" id="repeatBadgeBack">🔄 Review</div>
+                        <div class="card-content" id="answer"></div>
+                        <img class="card-image hidden" id="answerImage" alt="Answer image">
+                        <div class="tap-hint">Rate your confidence below</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="confidence-buttons">
+                <button class="confidence-btn hard" onclick="rateCard('hard')">😰 Hard</button>
+                <button class="confidence-btn medium" onclick="rateCard('medium')">🤔 Medium</button>
+                <button class="confidence-btn easy" onclick="rateCard('easy')">😊 Easy</button>
+            </div>
+
+            <div class="controls">
+                <button class="btn-prev" onclick="previousCard()">← Previous</button>
+                <button class="btn-mode" onclick="toggleMode()">🎯 Smart Mode</button>
+                <button class="btn-shuffle" onclick="shuffleCards()">🔀 Shuffle</button>
+                <button class="btn-next" onclick="nextCard()">Next →</button>
+                <button class="btn-reset" onclick="backToLibrary()">📚 Library</button>
+                <button class="btn-mode" onclick="window.location.href='cbt-mode.html'" style="background: #f5576c;">📝 CBT Test</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/flashcards.js">
+        
+       
+    </script>
+</body>
+</html>

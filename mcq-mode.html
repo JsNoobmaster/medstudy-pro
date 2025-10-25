@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Mode - MedStudy Pro</title>
+<link rel="stylesheet" href="styles/mcq-mode.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 MCQ Mode</h1>
+            <button class="nav-button" onclick="window.location.href='index.html'">← Back</button>
+        </div>
+
+        <div id="deckSelection">
+            <div class="upload-section">
+                <h2 style="text-align: center; margin-bottom: 20px;">🎯 Select Deck</h2>
+                <div class="deck-list" id="deckList"></div>
+            </div>
+        </div>
+
+        <div id="difficultySelection" class="hidden">
+            <div class="difficulty-selection">
+                <h2 style="text-align: center; margin-bottom: 20px;">⚡ Choose Difficulty</h2>
+                <div class="difficulty-grid">
+                    <div class="difficulty-card easy" onclick="startTest('easy')">
+                        <div class="difficulty-icon">🌱</div>
+                        <div class="difficulty-title">Easy</div>
+                        <div style="color: #666;">Relaxed pace</div>
+                        <div class="difficulty-time">⏱️ 60s per question</div>
+                    </div>
+
+                    <div class="difficulty-card medium" onclick="startTest('medium')">
+                        <div class="difficulty-icon">🔥</div>
+                        <div class="difficulty-title">Medium</div>
+                        <div style="color: #666;">Moderate challenge</div>
+                        <div class="difficulty-time">⏱️ 45s per question</div>
+                    </div>
+
+                    <div class="difficulty-card hard" onclick="startTest('hard')">
+                        <div class="difficulty-icon">⚡</div>
+                        <div class="difficulty-title">Hard</div>
+                        <div style="color: #666;">Exam conditions</div>
+                        <div class="difficulty-time">⏱️ 30s per question</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="testSection" class="hidden">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value" id="currentQuestion">1</span>
+                    <span class="stat-label">Question</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalQuestions">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value timer" id="timer">60</span>
+                    <span class="stat-label">Seconds</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="correctCount">0</span>
+                    <span class="stat-label">Correct</span>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <div class="question-text" id="questionText"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+
+                <div class="explanation-section hidden" id="explanationSection">
+                    <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 10px;" id="resultText"></div>
+                    <div id="explanationText"></div>
+                </div>
+
+                <button class="action-btn submit-btn" id="submitBtn" onclick="submitAnswer()">
+                    Submit Answer
+                </button>
+                <button class="action-btn next-btn hidden" id="nextBtn" onclick="nextQuestion()">
+                    Next Question →
+                </button>
+            </div>
+        </div>
+
+        <div id="resultsSection" class="hidden">
+            <div class="results-section">
+                <h2 style="font-size: 2.5em; margin-bottom: 20px;">🎉 Test Complete!</h2>
+                
+                <div class="score-display" id="scoreDisplay">0%</div>
+                
+                <p style="font-size: 1.2em; margin: 20px 0;">
+                    <strong id="finalCorrect">0</strong> correct out of <strong id="finalTotal">0</strong>
+                </p>
+
+                <div style="margin-top: 30px;">
+                    <button class="action-btn submit-btn" style="width: auto; padding: 15px 30px; margin: 10px;" onclick="retryTest()">🔄 Retry</button>
+                    <button class="action-btn" style="background: #868e96; color: white; width: auto; padding: 15px 30px; margin: 10px;" onclick="backToDecks()">📚 Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/mcq-mode.js">
+
+    </script>
+</body>
+</html>

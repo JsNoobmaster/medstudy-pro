@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSCE Mode - MedStudy Pro</title>
+<link rel="stylesheet" href="styles/osce-mode.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🩺 OSCE Mode</h1>
+            <button class="nav-button" onclick="window.location.href='index.html'">← Back to Hub</button>
+        </div>
+
+        <div id="stationSelection">
+            <div class="station-selection">
+                <h2>🎯 Select Your OSCE Station</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                    Choose a clinical examination station to practice
+                </p>
+                
+                <div class="stations-grid">
+                    <div class="station-card" onclick="startStation('cvs')">
+                        <div class="station-icon">❤️</div>
+                        <div class="station-title">Cardiovascular Examination</div>
+                        <div class="station-description">
+                            Complete systematic examination of the cardiovascular system
+                        </div>
+                        <span class="station-time">⏱️ 8 minutes</span>
+                    </div>
+
+                    <div class="station-card" onclick="startStation('resp')">
+                        <div class="station-icon">🫁</div>
+                        <div class="station-title">Respiratory Examination</div>
+                        <div class="station-description">
+                            Systematic chest examination including inspection, palpation, percussion
+                        </div>
+                        <span class="station-time">⏱️ 8 minutes</span>
+                    </div>
+
+                    <div class="station-card" onclick="startStation('abdo')">
+                        <div class="station-icon">🔍</div>
+                        <div class="station-title">Abdominal Examination</div>
+                        <div class="station-description">
+                            Complete abdominal examination with nine-region assessment
+                        </div>
+                        <span class="station-time">⏱️ 8 minutes</span>
+                    </div>
+
+                    <div class="station-card" onclick="startStation('neuro')">
+                        <div class="station-icon">🧠</div>
+                        <div class="station-title">Neurological Examination</div>
+                        <div class="station-description">
+                            Cranial nerves, motor, sensory, and cerebellar function
+                        </div>
+                        <span class="station-time">⏱️ 10 minutes</span>
+                    </div>
+
+                    <div class="station-card" onclick="startStation('musculo')">
+                        <div class="station-icon">🦴</div>
+                        <div class="station-title">Musculoskeletal Examination</div>
+                        <div class="station-description">
+                            Joint examination with GALS screening
+                        </div>
+                        <span class="station-time">⏱️ 8 minutes</span>
+                    </div>
+
+                    <div class="station-card" onclick="startStation('history')">
+                        <div class="station-icon">💬</div>
+                        <div class="station-title">History Taking</div>
+                        <div class="station-description">
+                            Complete medical history with presenting complaint
+                        </div>
+                        <span class="station-time">⏱️ 10 minutes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="osceSection" class="hidden">
+            <div class="timer-bar">
+                <div>
+                    <div style="font-size: 1.2em; margin-bottom: 5px;">⏱️ Time Remaining</div>
+                    <div class="timer-display" id="timerDisplay">8:00</div>
+                </div>
+                <div>
+                    <div style="font-size: 1.2em; margin-bottom: 5px;">Station</div>
+                    <div style="font-size: 1.5em; font-weight: bold;" id="stationName">CVS Examination</div>
+                </div>
+            </div>
+
+            <div class="osce-section">
+                <div class="scenario-box">
+                    <div class="scenario-title">📋 Clinical Scenario</div>
+                    <div class="scenario-text" id="scenarioText"></div>
+                </div>
+
+                <div class="progress-summary">
+                    <div class="progress-item">
+                        <div class="progress-value" id="completedCount">0</div>
+                        <div class="progress-label">Completed</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-value" id="totalSteps">0</div>
+                        <div class="progress-label">Total Steps</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-value" id="progressPercent">0%</div>
+                        <div class="progress-label">Progress</div>
+                    </div>
+                </div>
+
+                <div class="checklist-container">
+                    <div class="checklist-title">
+                        ✓ Examination Checklist
+                    </div>
+                    <div id="checklistItems"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn finish-btn" onclick="finishStation()">
+                        ✓ Finish Station
+                    </button>
+                    <button class="action-btn reset-btn" onclick="resetStation()">
+                        🔄 Reset
+                    </button>
+                    <button class="action-btn reset-btn" onclick="backToStations()">
+                        ← Back to Stations
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultsSection" class="hidden">
+            <div class="results-section">
+                <div class="results-header">
+                    <h2>🎉 Station Complete!</h2>
+                    <div class="performance-grade" id="gradeDisplay">Pass</div>
+                </div>
+
+                <div class="performance-breakdown">
+                    <div class="breakdown-item completed">
+                        <div class="breakdown-value" id="resultCompleted">0</div>
+                        <div>Steps Completed</div>
+                    </div>
+                    <div class="breakdown-item missed">
+                        <div class="breakdown-value" id="resultMissed">0</div>
+                        <div>Steps Missed</div>
+                    </div>
+                    <div class="breakdown-item time">
+                        <div class="breakdown-value" id="resultTime">0:00</div>
+                        <div>Time Taken</div>
+                    </div>
+                </div>
+
+                <div class="feedback-section">
+                    <div class="feedback-title">💡 Performance Feedback</div>
+                    <ul class="feedback-list" id="feedbackList"></ul>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn finish-btn" onclick="retryStation()">
+                        🔄 Retry Station
+                    </button>
+                    <button class="action-btn reset-btn" onclick="backToStations()">
+                        ← Back to Stations
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/osce-mode.js">
+
+    </script>
+</body>
+</html>

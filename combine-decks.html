@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combine Decks</title>
+<link rel="stylesheet" href="styles/combine-decks.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Combine Decks</h1>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="window.location.href='flashcards.html'">🧠 Flashcards</button>
+            <button class="nav-button" onclick="window.location.href='cbt-mode.html'">📝 CBT Test</button>
+            <button class="nav-button" onclick="window.location.href='statistics.html'">📊 Statistics</button>
+        </div>
+
+        <div class="main-section">
+            <h2 class="section-title">📚 Create Combined Deck</h2>
+            <p class="instruction">
+                Select multiple decks to combine them into one comprehensive study deck. 
+                Perfect for preparing for big exams!
+            </p>
+
+            <div id="successMessage" class="success-message hidden">
+                ✓ Combined deck created successfully!
+            </div>
+
+            <button class="action-btn select-all-btn" onclick="toggleSelectAll()">
+                <span id="selectAllText">✓ Select All</span>
+            </button>
+
+            <div class="deck-selection" id="deckSelection">
+                <div class="empty-state">No decks available. Create some decks first!</div>
+            </div>
+
+            <div class="selection-summary" id="selectionSummary" style="display: none;">
+                <div class="summary-text">Selected Decks Summary</div>
+                <div class="summary-stats">
+                    <div class="summary-stat">
+                        <div class="value" id="selectedCount">0</div>
+                        <div class="label">Decks Selected</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="value" id="totalCardsCount">0</div>
+                        <div class="label">Total Cards</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-section" id="nameInputSection" style="display: none;">
+                <label class="name-input-label">Name Your Combined Deck:</label>
+                <input 
+                    type="text" 
+                    class="name-input" 
+                    id="deckNameInput" 
+                    placeholder="e.g., Final Exam - All Topics"
+                    maxlength="100"
+                >
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn create-btn" id="createBtn" onclick="createCombinedDeck()" disabled>
+                    🎯 Create Combined Deck
+                </button>
+                <button class="action-btn cancel-btn" onclick="goBack()">
+                    ← Back
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/combine-decks.js">
+       
+    </script>
+</body>
+</html>

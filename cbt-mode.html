@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Theory Mode - MedStudy Pro</title>
+  <link rel="stylesheet" href="styles/cbt-mode.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Theory Mode</h1>
+            <button class="nav-button" onclick="window.location.href='index.html'">← Back</button>
+        </div>
+
+        <div id="uploadSection">
+            <div class="upload-section">
+                <h2 style="text-align: center; margin-bottom: 20px;">🎯 Start Theory Test</h2>
+                <div class="deck-list" id="deckList"></div>
+            </div>
+        </div>
+
+        <div id="testSection" class="hidden">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value" id="currentQuestion">1</span>
+                    <span class="stat-label">Question</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalQuestions">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="avgScore">0%</span>
+                    <span class="stat-label">Avg Score</span>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <div class="question-text" id="questionText"></div>
+                <textarea class="answer-input" id="answerInput" placeholder="Type your answer..."></textarea>
+                <button class="submit-btn" id="submitBtn" onclick="submitAnswer()">Submit</button>
+
+                <div class="ai-grading hidden" id="gradingSection">
+                    <div id="gradingResults">
+                        <div class="score-badge" id="scoreBadge"></div>
+                        <div class="feedback-section">
+                            <div id="overallFeedback"></div>
+                        </div>
+                        <div class="comparison-grid">
+                            <div class="answer-box your-answer">
+                                <div style="font-weight: bold; margin-bottom: 10px;">YOUR ANSWER</div>
+                                <div id="userAnswerDisplay"></div>
+                            </div>
+                            <div class="answer-box model-answer">
+                                <div style="font-weight: bold; margin-bottom: 10px;">MODEL ANSWER</div>
+                                <div id="modelAnswerDisplay"></div>
+                            </div>
+                        </div>
+                        <div class="feedback-section">
+                            <div style="font-weight: bold; margin-bottom: 10px;">Key Concepts</div>
+                            <div id="keywordDisplay"></div>
+                        </div>
+                        <button class="next-btn" onclick="nextQuestion()">Next Question →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultsSection" class="hidden">
+            <div style="background: white; border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center;">
+                <h2 style="font-size: 2.5em; margin-bottom: 20px;">🎉 Complete!</h2>
+                <div style="font-size: 4em; font-weight: bold; color: #667eea; margin: 30px 0;" id="scoreDisplay"></div>
+                <button class="submit-btn" style="width: auto; padding: 15px 30px; margin: 10px;" onclick="retryTest()">🔄 Retry</button>
+                <button class="next-btn" style="width: auto; padding: 15px 30px; margin: 10px;" onclick="backToLibrary()">📚 Library</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/cbt-mode-.js">
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedStudy Pro - Hub</title>
+<link rel="stylesheet" href="styles/med-school-hub.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 MedStudy Pro</h1>
+            <p>Your Complete Medical School Study Companion</p>
+        </div>
+
+        <div class="upload-section">
+            <h2 style="margin-bottom: 20px;">📤 Upload Study Material</h2>
+            <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" class="file-input" accept=".json" multiple>
+                <p style="font-size: 1.2em; color: #666; margin-bottom: 15px;">
+                    📁 Click to upload JSON files
+                </p>
+                <button class="upload-btn">Choose Files</button>
+            </div>
+        </div>
+
+        <div class="decks-section">
+            <h2>📚 Your Study Decks</h2>
+            <div class="deck-list" id="deckList">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📭</div>
+                    <p>No decks uploaded yet. Upload JSON files to get started!</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎯 Choose Your Study Mode</h2>
+
+        <div class="modes-grid">
+            <div class="mode-card" onclick="navigateToMode('flashcard')">
+                <span class="mode-icon">🧠</span>
+                <div class="mode-title">Flashcard Mode</div>
+                <div style="color: #666;">Active recall with spaced repetition</div>
+            </div>
+
+            <div class="mode-card" onclick="navigateToMode('mcq')">
+                <span class="mode-icon">📝</span>
+                <div class="mode-title">MCQ Mode</div>
+                <div style="color: #666;">Multiple choice with timer</div>
+            </div>
+
+            <div class="mode-card" onclick="navigateToMode('theory')">
+                <span class="mode-icon">📖</span>
+                <div class="mode-title">Theory Mode</div>
+                <div style="color: #666;">Essay questions with AI grading</div>
+            </div>
+
+            <div class="mode-card" onclick="navigateToMode('osce')">
+                <span class="mode-icon">🩺</span>
+                <div class="mode-title">OSCE Mode</div>
+                <div style="color: #666;">Clinical examinations</div>
+            </div>
+
+            <div class="mode-card" onclick="navigateToMode('steeplechase')">
+                <span class="mode-icon">🏃</span>
+                <div class="mode-title">Steeplechase</div>
+                <div style="color: #666;">Rapid-fire challenges</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/med-school-hub.js">
+
+    </script>
+</body>
+</html>

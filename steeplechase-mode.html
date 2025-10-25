@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steeplechase Mode</title>
+<link rel="stylesheet" href="styles/steeplechase-mode.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏃 Steeplechase Mode</h1>
+            <p>Rapid-fire challenge mode</p>
+        </div>
+
+        <button class="nav-button" onclick="goHome()">← Back to Hub</button>
+
+        <!-- Deck Selection Screen -->
+        <div id="deckSelectionScreen" class="deck-selection-screen">
+            <h2>📚 Select Your Decks</h2>
+            <p class="instruction-text">Choose one or more decks to practice with</p>
+
+            <div class="selection-actions">
+                <button class="select-all-btn" onclick="selectAllDecks()">Select All</button>
+                <button class="select-all-btn" onclick="deselectAllDecks()">Deselect All</button>
+            </div>
+
+            <div id="deckList" class="deck-list">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📭</div>
+                    <p>No decks found. Please upload decks from the hub.</p>
+                </div>
+            </div>
+
+            <div id="selectionSummary" class="selection-summary hidden">
+                <div class="summary-text">Total Questions Available:</div>
+                <div class="total-questions" id="totalQuestions">0</div>
+            </div>
+
+            <button class="continue-btn" id="continueBtn" onclick="showDifficultySelection()" disabled>
+                Continue to Difficulty Selection
+            </button>
+        </div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficultyScreen" class="difficulty-selection hidden">
+            <h2 style="text-align: center; color: #333; margin-bottom: 20px;">⚡ Choose Your Challenge</h2>
+            <div class="difficulty-grid">
+                <div class="difficulty-card easy" onclick="startGame('easy')">
+                    <div class="difficulty-icon">🌱</div>
+                    <div class="difficulty-title">Easy Mode</div>
+                    <div class="difficulty-desc">Perfect for beginners</div>
+                    <div class="difficulty-time">⏱️ 30 seconds per question</div>
+                </div>
+
+                <div class="difficulty-card medium" onclick="startGame('medium')">
+                    <div class="difficulty-icon">⚡</div>
+                    <div class="difficulty-title">Medium Mode</div>
+                    <div class="difficulty-desc">Standard challenge</div>
+                    <div class="difficulty-time">⏱️ 20 seconds per question</div>
+                </div>
+
+                <div class="difficulty-card hard" onclick="startGame('hard')">
+                    <div class="difficulty-icon">🔥</div>
+                    <div class="difficulty-title">Hard Mode</div>
+                    <div class="difficulty-desc">For experts</div>
+                    <div class="difficulty-time">⏱️ 15 seconds per question</div>
+                </div>
+
+                <div class="difficulty-card beast" onclick="startGame('beast')">
+                    <div class="difficulty-icon">💀</div>
+                    <div class="difficulty-title">Beast Mode</div>
+                    <div class="difficulty-desc">Ultimate challenge!</div>
+                    <div class="difficulty-time">⏱️ 10 seconds per question</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="game-section hidden">
+            <div class="game-header">
+                <div class="score-display">Score: <span id="score">0</span></div>
+                <div class="timer-display" id="timer">30</div>
+                <div class="combo-display">Combo: <span id="combo">0</span>🔥</div>
+            </div>
+
+            <div class="question-container" id="questionContainer">
+                <div class="question-type" id="questionType">Flashcard</div>
+                <div class="question-text" id="questionText">Loading...</div>
+                <div id="answerArea"></div>
+            </div>
+
+            <button class="submit-button" id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+            <div id="feedbackBar" class="feedback-bar hidden"></div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="results-section hidden">
+            <h2>🎉 Challenge Complete!</h2>
+            <div class="final-score" id="finalScore">0</div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="correctCount">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="wrongCount">0</div>
+                    <div class="stat-label">Wrong</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="maxCombo">0</div>
+                    <div class="stat-label">Max Combo</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="accuracy">0%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+            </div>
+
+            <div class="performance-message" id="performanceMessage"></div>
+
+            <div class="action-buttons">
+                <button class="action-btn retry-btn" onclick="restartGame()">🔄 Try Again</button>
+                <button class="action-btn home-btn" onclick="goHome()">🏠 Back to Hub</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/steeplechase-mode.js">
+
+    </script>
+</body>
+</html>
