@@ -143,6 +143,9 @@ function jumpToQuestion(index) {
     currentIndex = index;
     displayQuestion();
     renderQuestionNavigation();
+    
+    // Close navigation after jumping to question
+    toggleNavigation();
 }
 
 function displayQuestion() {
@@ -407,3 +410,4 @@ function toggleNavigation() {
         icon.textContent = '📋';
     }
 }
+
