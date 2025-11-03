@@ -27,6 +27,38 @@
                 <div class="deck-list" id="deckList"></div>
             </div>
         </div>
+        <!-- Resume Session Modal -->
+        <div id="resumeModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📚 Previous Session Found!</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="session-info">
+                        <div class="info-item">
+                            <span class="info-label">Difficulty:</span>
+                            <span class="info-value" id="modalDifficulty">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Progress:</span>
+                            <span class="info-value" id="modalProgress">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Score:</span>
+                            <span class="info-value" id="modalScore">-</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn continue-btn" onclick="continueSession()">
+                        ▶️ Continue Session
+                    </button>
+                    <button class="modal-btn new-btn" onclick="startNewSession()">
+                        🔄 Start New Test
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <div id="difficultySelection" class="hidden">
             <div class="difficulty-selection">
