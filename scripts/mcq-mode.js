@@ -56,14 +56,24 @@ function loadDeckList() {
         deckList.innerHTML = '<div style="text-align: center; color: #999; padding: 20px;">No decks with MCQ questions found.</div>';
     }
 }
+let savedSessionData = null;
 
 function selectDeck(deckId) {
     selectedDeckId = deckId;
-    document.getElementById('deckSelection').classList.add('hidden');
-    document.getElementById('difficultySelection').classList.remove('hidden');
+    
+    // Check for saved session
+    const savedSession = checkForSavedSession();
+    
+    if (savedSession) {
+        // Store session data and show modal
+        savedSessionData = savedSession;
+        showResumeModal(savedSession);
+    } else {
+        document.getElementById('deckSelection').classList.add('hidden');
+        document.getElementById('difficultySelection').classList.remove('hidden');
+    }
 }
-
-function startTest(difficulty) {
+function startTest(difficulty, continueSession = false) {
     const decks = JSON.parse(localStorage.getItem('flashcard_decks') || '{}');
     let deckData = decks[selectedDeckId];
     
@@ -82,6 +92,28 @@ function startTest(difficulty) {
         timePerQuestion = 30;
     }
     
+    // Check if continuing previous session
+    if (continueSession) {
+        const savedSession = JSON.parse(localStorage.getItem('mcq_session_' + selectedDeckId) || 'null');
+        if (savedSession && savedSession.difficulty === difficulty) {
+            // Restore previous session
+            questions = savedSession.questions;
+            currentIndex = savedSession.currentIndex;
+            results = savedSession.results;
+            answeredQuestions = savedSession.answeredQuestions;
+            
+            document.getElementById('difficultySelection').classList.add('hidden');
+            document.getElementById('testSection').classList.remove('hidden');
+            document.getElementById('totalQuestions').textContent = questions.length;
+            document.getElementById('correctCount').textContent = results.correct;
+            
+            renderQuestionNavigation();
+            displayQuestion();
+            return;
+        }
+    }
+    
+    // Start new test
     // Get MCQ questions
     questions = (currentDeck.mcqs || []).filter(mcq => 
         mcq.q && mcq.options && Array.isArray(mcq.options) && mcq.options.length > 0 &&
@@ -100,12 +132,36 @@ function startTest(difficulty) {
     results = { correct: 0, wrong: 0 };
     answeredQuestions = {}; // Reset answered questions
     
+    // Save initial session
+    saveSession(difficulty);
+    
     document.getElementById('difficultySelection').classList.add('hidden');
     document.getElementById('testSection').classList.remove('hidden');
     document.getElementById('totalQuestions').textContent = questions.length;
     
     renderQuestionNavigation();
     displayQuestion();
+}
+
+function saveSession(difficulty) {
+    const sessionData = {
+        difficulty: difficulty,
+        questions: questions,
+        currentIndex: currentIndex,
+        results: results,
+        answeredQuestions: answeredQuestions,
+        timestamp: Date.now()
+    };
+    localStorage.setItem('mcq_session_' + selectedDeckId, JSON.stringify(sessionData));
+}
+
+function checkForSavedSession() {
+    const savedSession = JSON.parse(localStorage.getItem('mcq_session_' + selectedDeckId) || 'null');
+    if (savedSession && savedSession.currentIndex < savedSession.questions.length) {
+        // Show continue option
+        return savedSession;
+    }
+    return null;
 }
 
 function shuffleArray(array) {
@@ -256,6 +312,9 @@ function showQuestionResult(isNewAnswer) {
             results.wrong++;
             answeredQuestions[currentIndex] = false;
         }
+        
+        // Save progress after each answer
+        saveSession(timePerQuestion === 60 ? 'easy' : timePerQuestion === 45 ? 'medium' : 'hard');
     }
 
     const options = document.querySelectorAll('.option');
@@ -334,6 +393,9 @@ function nextQuestion() {
 function showResults() {
     clearInterval(timerInterval);
     
+    // Clear saved session when test is complete
+    localStorage.removeItem('mcq_session_' + selectedDeckId);
+    
     document.getElementById('testSection').classList.add('hidden');
     document.getElementById('resultsSection').classList.remove('hidden');
     
@@ -398,16 +460,27 @@ function toggleNavigation() {
     }
 }
 
-function toggleNavigation() {
-    const navSection = document.getElementById('navigationSection');
-    const icon = document.getElementById('navToggleIcon');
+function showResumeModal(session) {
+    const difficultyName = session.difficulty.charAt(0).toUpperCase() + session.difficulty.slice(1);
+    const progress = session.currentIndex + 1;
+    const total = session.questions.length;
+    const score = session.results.correct;
     
-    if (navSection.classList.contains('hidden')) {
-        navSection.classList.remove('hidden');
-        icon.textContent = '✖️';
-    } else {
-        navSection.classList.add('hidden');
-        icon.textContent = '📋';
-    }
+    document.getElementById('modalDifficulty').textContent = difficultyName;
+    document.getElementById('modalProgress').textContent = `${progress}/${total} questions`;
+    document.getElementById('modalScore').textContent = `${score} correct`;
+    
+    document.getElementById('resumeModal').classList.remove('hidden');
 }
 
+function continueSession() {
+    document.getElementById('resumeModal').classList.add('hidden');
+    startTest(savedSessionData.difficulty, true);
+}
+
+function startNewSession() {
+    document.getElementById('resumeModal').classList.add('hidden');
+    localStorage.removeItem('mcq_session_' + selectedDeckId);
+    document.getElementById('deckSelection').classList.add('hidden');
+    document.getElementById('difficultySelection').classList.remove('hidden');
+}
