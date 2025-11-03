@@ -475,6 +475,7 @@ function showResumeModal(session) {
 
 function continueSession() {
     document.getElementById('resumeModal').classList.add('hidden');
+    document.getElementById('deckSelection').classList.add('hidden'); // ADD THIS LINE
     startTest(savedSessionData.difficulty, true);
 }
 
@@ -484,3 +485,4 @@ function startNewSession() {
     document.getElementById('deckSelection').classList.add('hidden');
     document.getElementById('difficultySelection').classList.remove('hidden');
 }
+
