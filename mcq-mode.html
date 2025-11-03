@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCQ Mode - MedStudy Pro</title>
-<link rel="stylesheet" href="styles/mcq-mode.css">
+    <link rel="stylesheet" href="styles/mcq-mode.css">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-F2YQWVMLTV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-F2YQWVMLTV');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2YQWVMLTV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-F2YQWVMLTV');
+    </script>
 </head>
 <body>
     <div class="container">
@@ -77,6 +76,17 @@
                 </div>
             </div>
 
+            <!-- Question Navigation Toggle Button -->
+            <button class="toggle-nav-btn" onclick="toggleNavigation()">
+                <span id="navToggleIcon">📋</span>
+                <span class="nav-btn-text">Question Navigator</span>
+            </button>
+            <!-- Question Navigation Grid (Hidden by default) -->
+            <div class="navigation-section hidden" id="navigationSection">
+                <h3 style="text-align: center; color: white; margin-bottom: 15px;">Jump to Question</h3>
+                <div class="question-navigation" id="questionNavigation"></div>
+            </div>
+
             <div class="test-section">
                 <div class="question-text" id="questionText"></div>
                 
@@ -114,9 +124,6 @@
         </div>
     </div>
 
-    <script src="scripts/mcq-mode.js">
-
-    </script>
+    <script src="scripts/mcq-mode.js"></script>
 </body>
-
 </html>
